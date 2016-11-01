@@ -52,5 +52,4 @@ void product::SetNumber(int Number)
 void product::Show()
 {
 	cout << "Назва виробу: " << name << endl << "Шифр: " << code << endl << "Кiлькiсть: " << number << endl;
-	cout << "Mentos";
 }
