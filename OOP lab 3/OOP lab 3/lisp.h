@@ -1,15 +1,14 @@
 class lisp
 {
 	char el;
-	int size;
-	const int MaxSize = 143;
 	lisp *next;
 public:
+	char operator[](int i);
+	void operator==(lisp*);
+	void operator+(lisp*);
+	lisp();
 	char Get_el();
-	lisp Get_next();
 	void Set_el(char);
-	void Set_next(lisp *);
-	void addToBegin(lisp ** head, char &a);
-	void del(lisp * head);
+	void input(lisp ** head, char &a);
 	void print(lisp * head);
 };
