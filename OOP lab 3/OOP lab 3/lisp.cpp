@@ -1,56 +1,29 @@
 #include "lisp.h"
 #include <iostream>
 using namespace std;
+lisp::lisp()
+{
+	el = ' ';
+	next = NULL;
+}
 void lisp::Set_el(char a)
 {
 	el = a;
-}
-void lisp::Set_next(lisp *o)
-{
-	next = o;
 }
 char lisp::Get_el()
 {
 	return el;
 }
-lisp lisp::Get_next()
-{
-	return *next;
-}
-void lisp::addToBegin(lisp ** head, char &a)
+void lisp::input(lisp ** head, char &a)
 {
 	lisp *n = new lisp;
 	n->el = a;
 	n->next = *head;
 	*head = n;
 }
-void lisp::del(lisp * head)
-{
-	if (head == NULL)
-		return;
-	else
-	{
-		lisp *p = head;
-		if (p->next != NULL)
-		{
-			while (p->next->next)//знаходить останній елемент
-				p = p->next;
-		}
-		if (p->next == NULL)//Перевіряє чи в списку не 1 елемент
-		{
-			cout << "Залишився 1 елемент, його не можна видаляти!\a\n";
-			return;
-		}
-		lisp *n;
-		n = p;
-		n->next = NULL;//Видаляє елемент
-		cout << "Потрiбний елемент успiшно видалено!\n";
-		return;
-	}
-}
 void lisp::print(lisp * head)
 {
-	while (head != NULL)//цикл що виводить елементи з першого до останнього
+	while (head != NULL)
 	{
 		if (head->next != NULL)
 		{
@@ -63,4 +36,79 @@ void lisp::print(lisp * head)
 			head = NULL;
 		}
 	}
+}
+char lisp::operator[](int i)
+{
+	int k = 0;
+	lisp *first = this;
+	while (first != NULL)
+	{
+		if (first->next != NULL)
+		{
+			k++;
+			if (i == k)
+			{
+				return first->el;
+			}
+			first = first->next;
+		}
+		else if (first->next == NULL)
+		{
+			k++;
+			if (i == k)
+			{
+				return first->el;
+			}
+			first = NULL;
+		}
+	}
+	if (first == NULL)
+	{
+		cout << "В списку немає стільки елементів!\n";
+		return ' ';
+	}
+}
+void lisp::operator==(lisp *second)
+{
+	lisp *first = this;
+	do
+	{
+		if (first->next != NULL)
+		{
+			if (first->el != second->el)
+			{
+				cout << "Lisp`s are not like each other!\n";
+				break;
+			}
+			first = first->next;
+			second = second->next;
+		}
+		else if (first->next == NULL&&first->el == second->el)
+		{
+			cout << "Lisp`s is like each other!\n";
+			break;
+		}
+		else if (first->next == NULL&&first->el != second->el)
+		{
+			cout << "Lisp`s are not like each other!\n";
+			break;
+		}
+	} while (first != NULL);
+}
+void lisp::operator+(lisp* second)
+{
+	lisp *first = this;
+	while (first != NULL)
+	{
+		if (first->next != NULL)
+		{
+			first = first->next;
+		}
+		else if (first->next == NULL)
+		{
+			first->next = second;
+			break;
+		}
+	}
+	first->print(this);
 }
