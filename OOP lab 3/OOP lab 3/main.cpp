@@ -1,55 +1,137 @@
 #include "lisp.h"
 #include <iostream>
+#include <windows.h>
 using namespace std;
 void main()
 {
-	lisp *head = NULL; // Посилання на перший елемент списку, так як він рівний нулю, список порожній
-	char v; // Змінні в які буде записана інформаційна частина, в "о" - для функції пошуку
-	setlocale(LC_ALL, "RUS");
-	int choise; // Змінна для користування меню
+	char v;
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	int choise;
 	do
 	{
-		cout << "1 - Додати елемент\n";
-		cout << "2 - Видалити елемент\n";
-		cout << "3 - Вивести поточний список\n";
-		cout << "4 - Вийти\n\n";
+		cout << "\tМеню\n";
+		cout << "1 - Знайти елемент по його позиції в списку\n";
+		cout << "2 - Перевірити списки на рівність\n";
+		cout << "3 - Об'єднати списки\n";
+		cout << "0 - Вийти\n\n";
 		cout << "Ваш вибiр: ";
 		cin >> choise;
-		switch (choise) // Меню
+		switch (choise)
 		{
 		case 1:
-			cout << "Введiть значення елемента: ";
-			cin >> v;
-			head->addToBegin(&head, v);//При виборі 1 викликається функція додавання елемента з переданими параметрами адреси і введеного користувачем з клавіатури значення
-			cout << "Елемент успiшно додано!\n";
-			break;
+		{
+				  system("cls");
+				  lisp *head = NULL;
+				  int e;
+				  cout << "Введіть кількість елементів у списку:"; cin >> e;
+				  for (int i = 0; i < e; i++)
+				  {
+				  cout << "Введiть значення "<<i+1<<" елемента: ";
+				  cin >> v;
+				  head->input(&head, v);
+				  head->Set_el(v);
+				  cout << "Елемент успiшно додано!\n";
+				  }
+				  int i;
+				  do
+				  {
+				  cout << "Введіть позицію елемента: "; cin >> i;
+					  if (i <= 0)
+					  {
+						  cout << "Число повинне бути більшим за нуль!\n";
+					  }
+				  } while (i <= 0);
+				  cout << head->operator[](i) << endl;
+				  break;
+		}
 		case 2:
-			if (head == NULL)//Перевіряє чи список не порожній
-			{
-				cout << "Список пустий!\a\n";
-			}
-			else
-			{
-				head->del(head);//Якщо не порожній викликається функція видалення елемента
-			}
-			break;
+		{
+				  system("cls");
+				  lisp *first = NULL;
+				  lisp *second = NULL;
+				  int n;
+				  do
+				  {
+					  cout << "Введіть кількість елементів у списках: "; cin >> n;
+					  if (n <= 0)
+					  {
+						  cout << "Число повинне бути більшим за нуль!\n";
+					  }
+				  } while (n <= 0);
+				  for (int i = 0; i < n; i++)
+				  {
+					  cout << "Введiть значення " << i + 1 << " елемента 1-го списку: ";
+					  cin >> v;
+					  first->input(&first, v);
+					  first->Set_el(v);
+					  cout << "Елемент успiшно додано!\n";
+				  }
+				  for (int i = 0; i < n; i++)
+				  {
+					  cout << "Введiть значення " << i + 1 << " елемента 2-го списку: ";
+					  cin >> v;
+					  second->input(&second, v);
+					  second->Set_el(v);
+					  cout << "Елемент успiшно додано!\n";
+				  }
+				  first->operator==(second);
+				  break;
+		}
 		case 3:
-			if (head == NULL)//Перевіряє чи список не порожній
-			{
-				cout << "Список пустий!\a\n";
-			}
-			else
-			{
-				head->print(head);//Якщо не порожній викликається функція виведення списку на екран
-			}
-			break;
-		case 4:
-			break;
+		{
+				  system("cls");
+				  lisp *first = NULL;
+				  lisp *second = NULL;
+				  int n,x;
+				  do
+				  {
+					  cout << "Введіть кількість елементів у 1 списку: "; cin >> n;
+					  if (n <= 0)
+					  {
+						  cout << "Число повинне бути більшим за нуль!\n";
+					  }
+				  } while (n <= 0);
+				  for (int i = 0; i < n; i++)
+				  {
+					  cout << "Введiть значення " << i + 1 << " елемента 1-го списку: ";
+					  cin >> v;
+					  first->input(&first, v);
+					  first->Set_el(v);
+					  cout << "Елемент успiшно додано!\n";
+				  }
+				  do
+				  {
+					  cout << "Введіть кількість елементів у 2 списку: "; cin >> x;
+					  if (x <= 0)
+					  {
+						  cout << "Число повинне бути більшшим за нуль!\n";
+					  }
+				  } while (x <= 0);
+				  for (int i = 0; i < x; i++)
+				  {
+					  cout << "Введiть значення " << i + 1 << " елемента 2-го списку: ";
+					  cin >> v;
+					  second->input(&second, v);
+					  second->Set_el(v);
+					  cout << "Елемент успiшно додано!\n";
+				  }
+				  first->operator+(second);
+				  break;
+		}
+		case 0:
+		{
+				  system("cls");
+				  cout << "Щасти вам!";
+				  break;
+		}
 		default:
-			cout << "Ви ввели не коректний вираз!\a\n";
-			break;
+		{
+				   cout << "Ви ввели не коректний вираз!\a\n";
+				   break;
+		}
 		}
 		system("pause>>void");
 		system("cls");
-	} while (choise != 4);
+	} while (choise != 0);
 }
