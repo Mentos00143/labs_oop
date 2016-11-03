@@ -77,7 +77,7 @@ void lisp::operator==(lisp *second)
 		{
 			if (first->el != second->el)
 			{
-				cout << "Lisp`s are not like each other!\n";
+				cout << "Списки не є однаковими!\n";
 				break;
 			}
 			first = first->next;
@@ -85,12 +85,12 @@ void lisp::operator==(lisp *second)
 		}
 		else if (first->next == NULL&&first->el == second->el)
 		{
-			cout << "Lisp`s is like each other!\n";
+			cout << "Списки однакові!\n";
 			break;
 		}
 		else if (first->next == NULL&&first->el != second->el)
 		{
-			cout << "Lisp`s are not like each other!\n";
+			cout << "Списки не є однаковими!\n";
 			break;
 		}
 	} while (first != NULL);
