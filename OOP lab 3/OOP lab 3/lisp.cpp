@@ -6,6 +6,16 @@ lisp::lisp()
 	el = ' ';
 	next = NULL;
 }
+lisp::~lisp()
+{
+
+}
+void lisp::operator=(lisp& second)
+{
+	lisp *first = &second;
+	cout << "Перший список:\n";
+	first->print(first);
+}
 void lisp::Set_el(char a)
 {
 	el = a;
@@ -64,8 +74,8 @@ char lisp::operator[](int i)
 	}
 	if (first == NULL)
 	{
-		cout << "В списку немає стільки елементів!\n";
-		return ' ';
+		cout << "В списку немає стільки елементів! Введіть менше число!\n";
+		return ' ';
 	}
 }
 void lisp::operator==(lisp *second)
