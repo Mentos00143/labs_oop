@@ -14,6 +14,7 @@ void main()
 		cout << "1 - Знайти елемент по його позиції в списку\n";
 		cout << "2 - Перевірити списки на рівність\n";
 		cout << "3 - Об'єднати списки\n";
+		cout << "4 - Присвоїти порожньому списку не порожній\n";
 		cout << "0 - Вийти\n\n";
 		cout << "Ваш вибiр: ";
 		cin >> choise;
@@ -27,22 +28,27 @@ void main()
 				  cout << "Введіть кількість елементів у списку:"; cin >> e;
 				  for (int i = 0; i < e; i++)
 				  {
-				  cout << "Введiть значення "<<i+1<<" елемента: ";
-				  cin >> v;
-				  head->input(&head, v);
-				  head->Set_el(v);
-				  cout << "Елемент успiшно додано!\n";
+					  cout << "Введiть значення " << i + 1 << " елемента: ";
+					  cin >> v;
+					  head->input(&head, v);
+					  head->Set_el(v);
+					  cout << "Елемент успiшно додано!\n";
 				  }
+				  head->print(head);
 				  int i;
-				  do
-				  {
-				  cout << "Введіть позицію елемента: "; cin >> i;
-					  if (i <= 0)
+				  char c;
+				  do{
+					  do
 					  {
-						  cout << "Число повинне бути більшим за нуль!\n";
-					  }
-				  } while (i <= 0);
-				  cout << head->operator[](i) << endl;
+						  cout << "Введіть позицію елемента: "; cin >> i;
+						  if (i <= 0)
+						  {
+							  cout << "Число повинне бути більшим за нуль!\n";
+						  }
+					  } while (i <= 0);
+					  c = head->operator[](i);
+				  } while (c == ' ');
+				  cout << c << endl;
 				  break;
 		}
 		case 2:
@@ -117,6 +123,31 @@ void main()
 					  cout << "Елемент успiшно додано!\n";
 				  }
 				  first->operator+(second);
+				  break;
+		}
+		case 4:
+		{
+				  system("cls");
+				  lisp *first = NULL;
+				  lisp *second = NULL;
+				  int x;
+				  do
+				  {
+					  cout << "Введіть кількість елементів у 2 списку: "; cin >> x;
+					  if (x <= 0)
+					  {
+						  cout << "Число повинне бути більшшим за нуль!\n";
+					  }
+				  } while (x <= 0);
+				  for (int i = 0; i < x; i++)
+				  {
+					  cout << "Введiть значення " << i + 1 << " елемента 2-го списку: ";
+					  cin >> v;
+					  second->input(&second, v);
+					  second->Set_el(v);
+					  cout << "Елемент успiшно додано!\n";
+				  }
+				  first->operator=(*second);
 				  break;
 		}
 		case 0:
