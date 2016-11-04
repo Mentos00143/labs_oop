@@ -6,7 +6,9 @@ public:
 	char operator[](int i);
 	void operator==(lisp*);
 	void operator+(lisp*);
+	void operator=(lisp&);
 	lisp();
+	~lisp();
 	char Get_el();
 	void Set_el(char);
 	void input(lisp ** head, char &a);
